@@ -1,11 +1,11 @@
 {
-  "name": "Novatek Power-Up",
-  "description": "Power-Up for Novatek Machine Board",
-  "details": "Power-Up for Novatek Machine Board",
+  "name": "Days Till Due",
+  "description": "",
+  "details": "Show how many days till the card is due.",
   "icon": {
-    "url": "./images/logo.png"
+    "url": "./logo.png"
   },
-  "author": "Joshua Dutton",
+  "author": "Daniel Ashbrook",
   "capabilities": [
     "card-badges"
   ],
