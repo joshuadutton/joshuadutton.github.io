@@ -28,12 +28,12 @@ function makeRequest (method, url) {
 }
 
 function getCard(card) {
-  return makeRequest('GET', cardEndpoint+card.id+"?dateLastActivity="+card.dateLastActivity)
+  return makeRequest('GET', cardEndpoint+card.id)
   .then(JSON.parse);
 }
 
 var getBadges = function(t) {
-  return t.card('id', 'dateLastActivity').then(function(card) {
+  return t.card('id').then(function(card) {
     console.log(card);
     return getCard(card).then(function(card) {
       var cardAutoDue = card.autoDue * 1000;
