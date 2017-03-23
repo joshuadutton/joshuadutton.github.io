@@ -31,8 +31,9 @@ var cardEndpoint = 'https://ygrstg2qvi.execute-api.us-west-2.amazonaws.com/dev/c
 
 var getBadges = function(t) {
   return t.card('id').get('id').then(function(cardId) {
+    console.log(cardId);
     return [{
-      text: cardId,
+      text: 4,
       color: 'red',
       refresh: 3600
     }];
