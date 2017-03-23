@@ -27,13 +27,15 @@ function makeRequest (method, url) {
   });
 }
 
-function getCard(cardId) {
-  return makeRequest('GET', cardEndpoint+cardId).then(JSON.parse);
+function getCard(card) {
+  return makeRequest('GET', cardEndpoint+card.id+"?dateLastActivity="+card.dateLastActivity)
+  .then(JSON.parse);
 }
 
 var getBadges = function(t) {
-  return t.card('id').get('id').then(function(cardId) {
-    return getCard(cardId).then(function(card) {
+  return t.card('id', 'dateLastActivity').then(function(card) {
+    console.log(card);
+    return getCard(card).then(function(card) {
       var cardAutoDue = card.autoDue * 1000;
       var daysLeft = Math.ceil( (cardAutoDue - Date.now())/(3600*24*1000) );
       return [{
