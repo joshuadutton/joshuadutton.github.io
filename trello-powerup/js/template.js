@@ -30,16 +30,16 @@ function makeRequest (method, url) {
 }
 
 function getCard(cardId) {
-  return makeRequest('GET', cardEndpoint+cardId);
+  return makeRequest('GET', cardEndpoint+cardId).then(JSON.parse);
 }
 
 var getBadges = function(t) {
   return t.card('id').get('id').then(function(cardId) {
     return getCard(cardId).then(function(card) {
       var cardAutoDue = card.autoDue * 1000;
-      var daysLeft = Math.ciel((cardAutoDue - Date.now())/(3600*24*1000));
+      var daysLeft = Math.ceil( (cardAutoDue - Date.now())/(3600*24*1000) );
       return [{
-        text: 5,
+        text: daysLeft + ' days left',
         color: 'red',
         refresh: 3600
       }];
