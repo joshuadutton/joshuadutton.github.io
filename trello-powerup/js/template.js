@@ -33,10 +33,8 @@ function getCard(cardId) {
 }
 
 var getBadges = function(t) {
-  return t.card('id', 'dateLastActivity').get('id', 'dateLastActivity')
-  .then(function(cardId, dateLastActivity) {
+  return t.card('id').get('id').then(function(cardId) {
     console.log(cardId);
-    console.log(dateLastActivity);
     return getCard(cardId).then(function(card) {
       var cardAutoDue = card.autoDue * 1000;
       var daysLeft = Math.ceil( (cardAutoDue - Date.now())/(3600*24*1000) );
