@@ -1,5 +1,3 @@
-/* global TrelloPowerUp */
-
 var Promise = TrelloPowerUp.Promise;
 // var WHITE_ICON = './images/icon-white.svg';
 // var GRAY_ICON = './images/icon-gray.svg';
@@ -35,15 +33,20 @@ function getCard(cardId) {
 
 var getBadges = function(t) {
   return t.card('id').get('id').then(function(cardId) {
-    return getCard(cardId).then(function(card) {
-      var cardAutoDue = card.autoDue * 1000;
-      var daysLeft = Math.ceil( (cardAutoDue - Date.now())/(3600*24*1000) );
-      return [{
-        text: daysLeft + ' days left',
-        color: 'red',
-        refresh: 3600
-      }];
-    });
+    return [{
+      text: cardId,
+      color: 'red',
+      refresh: 3600
+    }];
+    // return getCard(cardId).then(function(card) {
+    //   var cardAutoDue = card.autoDue * 1000;
+    //   var daysLeft = Math.ceil( (cardAutoDue - Date.now())/(3600*24*1000) );
+    //   return [{
+    //     text: daysLeft + ' days left',
+    //     color: 'red',
+    //     refresh: 3600
+    //   }];
+    // });
   });
 };
 
