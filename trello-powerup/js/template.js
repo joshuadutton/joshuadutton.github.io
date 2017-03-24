@@ -34,7 +34,6 @@ function getCard(cardId) {
 
 var getBadges = function(t) {
   return t.card('id').get('id').then(function(cardId) {
-    console.log(cardId);
     return getCard(cardId).then(function(card) {
       var cardAutoDue = card.autoDueTimestamp * 1000;
       var daysLeft = Math.ceil( (cardAutoDue - Date.now())/(3600*24*1000) );
@@ -47,6 +46,9 @@ var getBadges = function(t) {
         color: 'red',
         refresh: 3600
       }];
+    }).catch(function(error) {
+      console.log("Error on card with id: "+cardId);
+      console.error(error);
     });
   });
 };
