@@ -38,8 +38,12 @@ var getBadges = function(t) {
     return getCard(cardId).then(function(card) {
       var cardAutoDue = card.autoDueTimestamp * 1000;
       var daysLeft = Math.ceil( (cardAutoDue - Date.now())/(3600*24*1000) );
+      var daysLeftText = ' days left';
+      if (daysLeft == 1) {
+        daysLeftText = ' day left';
+      }
       return [{
-        text: daysLeft + ' days left',
+        text: daysLeft + daysLeftText,
         color: 'red',
         refresh: 3600
       }];
