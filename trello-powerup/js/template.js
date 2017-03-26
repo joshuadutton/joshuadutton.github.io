@@ -1,5 +1,31 @@
-
+var Promise = TrelloPowerUp.Promise;
+// var WHITE_ICON = './images/icon-white.svg';
+// var GRAY_ICON = './images/icon-gray.svg';
 var cardEndpoint = 'https://ygrstg2qvi.execute-api.us-west-2.amazonaws.com/dev/card/';
+
+function makeRequest (method, url) {
+  return new Promise(function (resolve, reject) {
+    var xhr = new XMLHttpRequest();
+    xhr.open(method, url);
+    xhr.onload = function () {
+      if (this.status >= 200 && this.status < 300) {
+        resolve(xhr.response);
+      } else {
+        reject({
+          status: this.status,
+          statusText: xhr.statusText
+        });
+      }
+    };
+    xhr.onerror = function () {
+      reject({
+        status: this.status,
+        statusText: xhr.statusText
+      });
+    };
+    xhr.send();
+  });
+}
 
 function getCard(cardId) {
   return makeRequest('GET', cardEndpoint+cardId)
@@ -30,15 +56,5 @@ var getBadges = function(t) {
 TrelloPowerUp.initialize({
   'card-badges': function(t, options) {
     return getBadges(t);
-  },
-  'card-detail-badges': function(t, options) {
-    return getBadges(t);
-  },
-  'show-settings': function(t, options) {
-    return t.popup({
-      title: 'Settings',
-      url: './settings.html',
-      height: 184
-    });
   }
 });
